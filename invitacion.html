@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invitación Elegancia Floral</title>
+<style>
+/* Reset y tipografía */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; scroll-behavior: smooth; }
+body { background: #fff6f0; color: #333; overflow-x: hidden; }
+
+/* Contenedor del carrusel */
+.slider {
+    display: flex;
+    overflow-x: hidden;
+    scroll-snap-type: x mandatory;
+    width: 100vw;
+    height: 100vh;
+}
+.slide {
+    scroll-snap-align: start;
+    min-width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+}
+
+/* Navegación */
+.nav {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+.nav button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(164,63,63,0.7);
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.nav button:hover { background: rgba(135,47,47,0.9); }
+
+/* Secciones internas */
+section h2 { font-size: 2em; margin-bottom: 20px; color: #a43f3f; }
+section p { font-size: 1.2em; line-height: 1.5; margin-bottom: 20px; }
+.btn { display: inline-block; background: #a43f3f; color: #fff; padding: 12px 25px; border-radius: 8px; text-decoration: none; transition: 0.3s; }
+.btn:hover { background: #872f2f; }
+
+/* Formulario RSVP */
+form { display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin: auto; }
+input, textarea, button { padding: 10px; border-radius: 6px; border: 1px solid #ccc; font-size: 1em; }
+button { background: #a43f3f; color: #fff; border: none; cursor: pointer; transition: 0.3s; }
+button:hover { background: #872f2f; }
+
+/* Cuenta regresiva */
+#countdown { font-size: 2em; background: rgba(255,255,255,0.7); padding: 0.5em 1em; border-radius: 10px; color: #333; }
+
+/* Responsive */
+@media(max-width:768px){
+    section h2 { font-size: 1.5em; }
+    #countdown { font-size: 1.5em; }
+}
+</style>
+</head>
+<body>
+
+<!-- Navegación tipo carrusel -->
+<div class="nav">
+    <button onclick="goToSlide(0)">Inicio</button>
+    <button onclick="goToSlide(1)">Detalles</button>
+    <button onclick="goToSlide(2)">RSVP</button>
+    <button onclick="goToSlide(3)">Regalos</button>
+    <button onclick="goToSlide(4)">Dress Code</button>
+    <button onclick="goToSlide(5)">Música</button>
+</div>
+
+<!-- Carrusel -->
+<div class="slider" id="slider">
+
+    <!-- Slide 0: Portada -->
+    <div class="slide" style="background-image:url('https://i.imgur.com/4ZpXcQy.jpg');">
+        <h1>Brayan & Alejandra</h1>
+        <p>23 de Mayo 2026 - 4:00 PM</p>
+        <div id="countdown"></div>
+    </div>
+
+    <!-- Slide 1: Detalles del evento -->
+    <div class="slide" style="background-color:#fff6f0; color:#333; text-shadow:none;">
+        <section>
+            <h2>Detalles del Evento</h2>
+            <p>Lugar: Finca La Cabaña, Armenia, Quindío</p>
+            <p>Por favor llega a las 3:30 PM para disfrutar cada detalle de nuestra ceremonia.</p>
+            <a href="https://www.google.com/maps?q=Finca+La+Cabaña+Armenia+Quindío" target="_blank" class="btn">Cómo llegar</a>
+        </section>
+    </div>
+
+    <!-- Slide 2: RSVP -->
+    <div class="slide" style="background-color:#f9ece5; color:#333; text-shadow:none;">
+        <section>
+            <h2>Confirmar Asistencia</h2>
+            <form id="rsvpForm">
+                <input type="text" name="nombre" placeholder="Tu nombre" required>
+                <input type="email" name="email" placeholder="Tu correo" required>
+                <textarea name="mensaje" placeholder="Mensaje o comentario"></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+            <p id="mensajeConfirm" style="color:green; margin-top:10px; display:none;">¡Gracias! Tu asistencia ha sido confirmada.</p>
+        </section>
+    </div>
+
+    <!-- Slide 3: Regalos -->
+    <div class="slide" style="background-color:#fff0f2; color:#333; text-shadow:none;">
+        <section>
+            <h2>Regalos</h2>
+            <p>Si deseas hacernos un regalo, puedes enviarlo a nuestra lista de regalos o hacer una contribución simbólica:</p>
+            <ul>
+                <li>Regalos físicos: Tienda XYZ, Calle 123, Armenia</li>
+                <li>Transferencia: Banco ABC - Cuenta 1234567890</li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- Slide 4: Dress Code -->
+    <div class="slide" style="background-color:#e8f0f8; color:#333; text-shadow:none;">
+        <section>
+            <h2>Dress Code</h2>
+            <p>Elegancia Floral: colores pastel, vestidos largos o trajes claros.</p>
+            <p>Evita colores oscuros o demasiado llamativos.</p>
+        </section>
+    </div>
+
+    <!-- Slide 5: Música / Playlist -->
+    <div class="slide" style="background-color:#fef7f0; color:#333; text-shadow:none;">
+        <section>
+            <h2>Música</h2>
+            <p>Escucha nuestra playlist especial para el evento:</p>
+            <a href="https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M" target="_blank" class="btn">Escuchar Playlist</a>
+        </section>
+    </div>
+
+</div>
+
+<script>
+// Función para navegar a un slide
+function goToSlide(index){
+    const slider = document.getElementById('slider');
+    slider.scrollTo({ left: window.innerWidth * index, behavior: 'smooth' });
+}
+
+// Cuenta regresiva
+const countdown = document.getElementById('countdown');
+const fechaEvento = new Date('May 23, 2026 16:00:00').getTime();
+function actualizarCountdown() {
+    const ahora = new Date().getTime();
+    const distancia = fechaEvento - ahora;
+    if(distancia < 0){ countdown.innerHTML = "¡El evento ya comenzó!"; return; }
+    const dias = Math.floor(distancia / (1000*60*60*24));
+    const horas = Math.floor((distancia % (1000*60*60*24)) / (1000*60*60));
+    const minutos = Math.floor((distancia % (1000*60*60)) / (1000*60));
+    const segundos = Math.floor((distancia % (1000*60)) / 1000);
+    countdown.innerHTML = `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+}
+setInterval(actualizarCountdown, 1000);
+actualizarCountdown();
+
+// Formulario RSVP
+const form = document.getElementById('rsvpForm');
+const mensajeConfirm = document.getElementById('mensajeConfirm');
+form.addEventListener('submit', function(e){
+    e.preventDefault();
+    mensajeConfirm.style.display = 'block';
+    form.reset();
+});
+</script>
+
+</body>
+</html>
